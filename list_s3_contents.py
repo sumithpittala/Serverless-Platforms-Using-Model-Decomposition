@@ -1,10 +1,19 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 import boto3
 s3 = boto3.client('s3')
 resp = s3.list_objects_v2(Bucket='mobilenetv3-bucket', Prefix='mobilenetv3/')
 print('Found:', resp.get('KeyCount'))
 for obj in resp.get('Contents', []):
     print('-', obj['Key'], obj['Size'])
+=======
+import boto3
+s3 = boto3.client('s3')
+resp = s3.list_objects_v2(Bucket='mobilenetv3-bucket', Prefix='mobilenetv3/')
+print('Found:', resp.get('KeyCount'))
+for obj in resp.get('Contents', []):
+    print('-', obj['Key'], obj['Size'])
+>>>>>>> 18d4c84070273e123ca5c9919152b87f699818ab
 =======
 import boto3
 s3 = boto3.client('s3')

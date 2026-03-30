@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 # mobilenetv3 serverless prototype
+=======
+[README.md](https://github.com/user-attachments/files/26353867/README.md)
+# serverless prototype
+>>>>>>> 18d4c84070273e123ca5c9919152b87f699818ab
 
 This project demonstrates the paper "Machine Learning Inference on Serverless Platforms Using Model Decomposition" by slicing an ONNX model and running each slice as a separate Serverless function (prototype used AWS Lambda + Step Functions).
 
@@ -257,8 +262,16 @@ This implementation is based on:
 
 ## License
 
+<<<<<<< HEAD
 licensed under the open source code of conduct
 
 ## Contributing
 
 contributions and suggestions are welcomed
+=======
+- licensed under the open source code of conduct
+
+## Contributing
+
+- contributions and suggestions are welcomed
+>>>>>>> 18d4c84070273e123ca5c9919152b87f699818ab
