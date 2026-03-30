@@ -1,0 +1,97 @@
+{
+  "Comment": "Serverless ML Inference Workflow - Executes ONNX model slices sequentially",
+  "StartAt": "Init",
+  "States": {
+    "Init": {
+      "Type": "Pass",
+      "Comment": "Initialize the workflow with input parameters",
+      "Parameters": {
+        "bucket.$": "$.bucket",
+        "slice_id": 0,
+        "total_slices.$": "$.total_slices",
+        "input_key.$": "$.input_key",
+        "output_key.$": "$.output_key",
+        "model_prefix.$": "$.model_prefix",
+        "keep_going": true
+      },
+      "Next": "ExecuteSlice"
+    },
+    "ExecuteSlice": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::lambda:invoke",
+      "Parameters": {
+        "FunctionName": "ml-inference-slice-handler",
+        "Payload": {
+          "bucket.$": "$.bucket",
+          "slice_id.$": "$.slice_id",
+          "total_slices.$": "$.total_slices",
+          "input_key.$": "$.input_key",
+          "output_key.$": "$.output_key",
+          "model_prefix.$": "$.model_prefix"
+        }
+      },
+      "ResultPath": "$.lambda_result",
+      "Retry": [
+        {
+          "ErrorEquals": [
+            "Lambda.ServiceException",
+            "Lambda.AWSLambdaException",
+            "Lambda.SdkClientException",
+            "Lambda.TooManyRequestsException"
+          ],
+          "IntervalSeconds": 2,
+          "MaxAttempts": 3,
+          "BackoffRate": 2.0
+        }
+      ],
+      "Catch": [
+        {
+          "ErrorEquals": ["States.ALL"],
+          "ResultPath": "$.error",
+          "Next": "HandleError"
+        }
+      ],
+      "Next": "IsExecutionCompleted"
+    },
+    "IsExecutionCompleted": {
+      "Type": "Choice",
+      "Comment": "Check if all slices have been executed",
+      "Choices": [
+        {
+          "Variable": "$.lambda_result.keep_going",
+          "BooleanEquals": true,
+          "Next": "PrepareNextSlice"
+        }
+      ],
+      "Default": "Done"
+    },
+    "PrepareNextSlice": {
+      "Type": "Pass",
+      "Comment": "Prepare parameters for the next slice execution",
+      "Parameters": {
+        "bucket.$": "$.bucket",
+        "slice_id.$": "$.lambda_result.next_slice",
+        "total_slices.$": "$.total_slices",
+        "input_key.$": "$.lambda_result.input_key_next",
+        "output_key.$": "$.lambda_result.output_key_next",
+        "model_prefix.$": "$.model_prefix",
+        "keep_going": true
+      },
+      "Next": "ExecuteSlice"
+    },
+    "Done": {
+      "Type": "Succeed",
+      "Comment": "All slices executed successfully",
+      "OutputPath": "$.lambda_result"
+    },
+    "HandleError": {
+      "Type": "Fail",
+      "Comment": "Handle errors during execution",
+      "Error": "ExecutionFailed",
+      "Cause": "An error occurred during ML inference execution"
+    }
+  }
+}
+
+
+

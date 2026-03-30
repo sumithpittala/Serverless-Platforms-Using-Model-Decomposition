@@ -1,0 +1,9 @@
+boto3
+numpy
+onnx
+onnxruntime
+tensorflow
+tf2onnx
+PyMuPDF
+pdfminer.six
+Pillow
