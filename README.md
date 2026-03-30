@@ -1,5 +1,5 @@
 [README.md](https://github.com/user-attachments/files/26353867/README.md)
-# mobilenetv3 serverless prototype
+# serverless prototype
 
 This project demonstrates the paper "Machine Learning Inference on Serverless Platforms Using Model Decomposition" by slicing an ONNX model and running each slice as a separate Serverless function (prototype used AWS Lambda + Step Functions).
 
@@ -240,10 +240,10 @@ Optimize by:
 ## Limitations & Future Work
 
 Current implementation:
-- ✅ Model decomposition
-- ✅ Sequential slice execution
-- ✅ S3-based intermediate storage
-- ✅ Error handling and retries
+- Model decomposition
+- Sequential slice execution
+- S3-based intermediate storage
+- Error handling and retries
 
 Potential improvements:
 - Parallel slice execution (for models with branching)
@@ -258,11 +258,8 @@ This implementation is based on:
 
 ## License
 
-[Your License Here]
+- licensed under the open source code of conduct
 
 ## Contributing
 
-[Your Contributing Guidelines Here]
-
-
-
+- contributions and suggestions are welcomed
