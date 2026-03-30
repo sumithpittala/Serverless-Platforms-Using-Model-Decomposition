@@ -1,0 +1,13 @@
+{
+  "created_at": "2025-11-18T06:38:14.509949Z",
+  "bucket": "mobilenetv3-bucket",
+  "prefix": "mobilenetv3/slices",
+  "slices": [
+    "mobilenetv3/slices/slice_0.onnx",
+    "mobilenetv3/slices/slice_1.onnx",
+    "mobilenetv3/slices/slice_2.onnx",
+    "mobilenetv3/slices/slice_3.onnx",
+    "mobilenetv3/slices/slice_4.onnx"
+  ],
+  "count": 5
+}
