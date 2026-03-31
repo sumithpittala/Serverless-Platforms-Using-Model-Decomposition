@@ -1,9 +1,5 @@
-<<<<<<< HEAD
-# mobilenetv3 serverless prototype
-=======
 [README.md](https://github.com/user-attachments/files/26353867/README.md)
 # serverless prototype
->>>>>>> 18d4c84070273e123ca5c9919152b87f699818ab
 
 This project demonstrates the paper "Machine Learning Inference on Serverless Platforms Using Model Decomposition" by slicing an ONNX model and running each slice as a separate Serverless function (prototype used AWS Lambda + Step Functions).
 
@@ -74,6 +70,12 @@ The project decomposes large ML models into smaller sub-models (slices) that can
 
 ## Quick Start
 
+### 0. start docker
+
+```bash
+docker-compose up -d
+```
+
 ### 1. Export Model to ONNX
 
 ```bash
@@ -85,7 +87,7 @@ This creates `mobilenetv3.onnx` from a pre-trained MobileNetV3 model.
 ### 2. Slice the Model
 
 ```bash
-python 2_slice_model.py
+python 2_slice_model.py --model mobilenetv3.onnx --slices 5 --out_dir slices
 ```
 
 This decomposes the ONNX model into 5 slices (configurable) in the `slices/` directory.
@@ -104,7 +106,7 @@ Checks if slices meet Serverless platform constraints:
 ### 4. Prepare Input Data
 
 ```bash
-python create_input_and_upload.py
+python 4_create_input_and_upload.py --image dog.jpg --upload
 ```
 
 Creates a preprocessed input image and uploads it to S3.
@@ -112,7 +114,7 @@ Creates a preprocessed input image and uploads it to S3.
 ### 5. Upload Slices to S3
 
 ```bash
-python upload_slices_to_s3.py
+python create_s3_manifest.py --bucket mobilenetv3-bucket
 ```
 
 Uploads all model slices to your S3 bucket.
@@ -274,4 +276,3 @@ contributions and suggestions are welcomed
 ## Contributing
 
 - contributions and suggestions are welcomed
->>>>>>> 18d4c84070273e123ca5c9919152b87f699818ab
