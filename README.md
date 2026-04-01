@@ -145,6 +145,36 @@ python run_full_pipeline.py
 
 This script guides you through all steps interactively.
 
+## demonstration of model decomposition using awscli
+
+### 0. to show sliced model in s3
+This proves you successfully broke the model into pieces and uploaded them.
+
+```bash
+aws --endpoint-url=http://localhost:4566 s3 ls s3://mobilenetv3-bucket/mobilenetv3/slices/ --recursive
+```
+
+### 1. show the lambda function
+This proves your ML Inference code is deployed and ready to run.
+
+```bash
+aws --endpoint-url=http://localhost:4566 lambda list-functions
+```
+
+### 2. show the step functions workflow
+This is the "Orchestrator" that manages the slices.
+
+```bash
+aws --endpoint-url=http://localhost:4566 stepfunctions list-state-machines
+```
+
+### 3. to print the inference logs 
+If you want to show the logs (to prove the Lambda actually ran the inference), run:
+
+```bash
+aws --endpoint-url=http://localhost:4566 logs describe-log-groups
+```
+
 ## Architecture
 
 ```
