@@ -175,6 +175,12 @@ If you want to show the logs (to prove the Lambda actually ran the inference), r
 aws --endpoint-url=http://localhost:4566 logs describe-log-groups
 ```
 
+### 4. contents of manifest.json using s3 cp command
+To show the contents of the manifest.json file directly in your terminal.
+
+```bash
+aws --endpoint-url=http://localhost:4566 s3 cp s3://mobilenetv3-bucket/mobilenetv3/slices/manifest.json -
+```
 ## Architecture
 
 ```
