@@ -1,5 +1,5 @@
 [README.md](https://github.com/user-attachments/files/26353867/README.md)
-# serverless prototype
+# Serverless Prototype
 
 This project demonstrates the paper "Machine Learning Inference on Serverless Platforms Using Model Decomposition" by slicing an ONNX model and running each slice as a separate Serverless function (prototype used AWS Lambda + Step Functions).
 
@@ -70,7 +70,7 @@ The project decomposes large ML models into smaller sub-models (slices) that can
 
 ## Quick Start
 
-### 0. start docker
+### 0. Start docker
 
 ```bash
 docker-compose up -d
@@ -147,35 +147,35 @@ This script guides you through all steps interactively.
 
 ## demonstration of model decomposition using awscli
 
-### 0. to show sliced model in s3
+### 0. To show sliced model in s3
 This proves you successfully broke the model into pieces and uploaded them.
 
 ```bash
 aws --endpoint-url=http://localhost:4566 s3 ls s3://mobilenetv3-bucket/mobilenetv3/slices/ --recursive
 ```
 
-### 1. show the lambda function
+### 1. Show the lambda function
 This proves your ML Inference code is deployed and ready to run.
 
 ```bash
 aws --endpoint-url=http://localhost:4566 lambda list-functions
 ```
 
-### 2. show the step functions workflow
+### 2. Show the step functions workflow
 This is the "Orchestrator" that manages the slices.
 
 ```bash
 aws --endpoint-url=http://localhost:4566 stepfunctions list-state-machines
 ```
 
-### 3. to print the inference logs 
+### 3. To print the inference logs 
 If you want to show the logs (to prove the Lambda actually ran the inference), run:
 
 ```bash
 aws --endpoint-url=http://localhost:4566 logs describe-log-groups
 ```
 
-### 4. contents of manifest.json using s3 cp command
+### 4. Contents of manifest.json using s3 cp command
 To show the contents of the manifest.json file directly in your terminal.
 
 ```bash
