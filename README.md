@@ -300,15 +300,8 @@ This implementation is based on:
 
 ## License
 
-<<<<<<< HEAD
 licensed under the open source code of conduct
 
 ## Contributing
 
 contributions and suggestions are welcomed
-=======
-- licensed under the open source code of conduct
-
-## Contributing
-
-- contributions and suggestions are welcomed
